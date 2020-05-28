@@ -15,7 +15,7 @@ Module Module1
     Function Main(args() As String) As Integer
 
         'example arguments
-        'args(0) = "C:\WAT_PDM_PRD\Integrated Systems\Line heating\Lam Research\476132-Top Plate Gas Distribution\3_Quote Component Heaters\Heaters\2086-8072\2086-8072.sldasm"
+        'args(0) = "C:\Vault\Folder1\Folder1\filename.sldasm"
         'args(1) = "32"
         'args(2) = "fix: file reverted to version 32 (FDT-1155)"
 
