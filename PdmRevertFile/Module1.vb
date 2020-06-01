@@ -1,4 +1,4 @@
-﻿Option Explicit On
+Option Explicit On
 
 Imports System.Configuration
 Imports EPDM.Interop.epdm
@@ -100,12 +100,12 @@ Module Module1
         Try
             Dim curVer = file.CurrentVersion
             Dim enumVer = DirectCast(file, IEdmEnumeratorVersion5)
-            If checkRevNo <> 0 And checkRevNo <> curVer Then
-                LogError("Check version does not match so skipping, FILE_PATH=" + fullPath + ", CURRENT_VERSION_NO=" + curVer.ToString() + ", CHECK_VERSION_NO=" + checkRevNo.ToString())
-                Return EXIT_SKIPPED
-            End If
             If enumVer.GetVersion(curVer).Comment = checkinMsg Then
                 LogError("Comment already present so doing nothing, FILE_PATH=" + fullPath + ", VERSION_NO=" + revNo.ToString() + ", CHECKIN_MESSAGE=" + checkinMsg)
+                Return EXIT_SKIPPED
+            End If
+            If checkRevNo <> 0 And checkRevNo <> curVer Then
+                LogError("Check version does not match so skipping, FILE_PATH=" + fullPath + ", CURRENT_VERSION_NO=" + curVer.ToString() + ", CHECK_VERSION_NO=" + checkRevNo.ToString())
                 Return EXIT_SKIPPED
             End If
         Catch ex As Exception
