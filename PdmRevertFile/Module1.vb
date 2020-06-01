@@ -1,4 +1,4 @@
-Option Explicit On
+﻿Option Explicit On
 
 Imports System.Configuration
 Imports EPDM.Interop.epdm
@@ -113,11 +113,13 @@ Module Module1
             Return EXIT_FAILURE
         End Try
 
+        Dim didLock As Boolean = False
         'Check out the file 
         LogDebug("Trying to check out file")
         Try
             If Not file.IsLocked Then
                 file.LockFile(folder.ID, 0, EdmLockFlag.EdmLock_Simple)
+                didLock = True
             End If
         Catch ex As Exception
             LogError("could not lock file FILE_PATH=" + fullPath, ex)
@@ -145,7 +147,9 @@ Module Module1
             End If
         Catch ex As Exception
             LogError("cannot check-in file FILE_PATH=" + fullPath, ex)
-            file.UndoLockFile(0)
+            If didLock Then
+                file.UndoLockFile(0)
+            End If
             Return EXIT_FAILURE
         End Try
 
